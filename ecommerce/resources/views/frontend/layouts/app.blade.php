@@ -24,6 +24,7 @@
       <link rel="stylesheet" href="{{ asset('assets/frontend') }}/css/bootstrap-select.min.css">
       <!-- Icons/Glyphs -->
       <link rel="stylesheet" href="{{ asset('assets/frontend') }}/css/font-awesome.css">
+      <link rel="stylesheet" href="{{ asset('assets/backend') }}/css/toastr.min.css">
       <!-- Fonts -->
       <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
       <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800' rel='stylesheet' type='text/css'>
@@ -71,6 +72,29 @@
       <script src="{{ asset('assets/frontend') }}/js/lightbox.min.js"></script>
       <script src="{{ asset('assets/frontend') }}/js/bootstrap-select.min.js"></script>
       <script src="{{ asset('assets/frontend') }}/js/wow.min.js"></script>
+      <script src="{{ asset('assets/backend') }}/js/toastr.min.js"></script>
       <script src="{{ asset('assets/frontend') }}/js/scripts.js"></script>
+      <script>
+            @if(Session::has('message'))
+                var type = "{{ Session::get('alert-type', 'info') }}";
+                switch(type){
+                    case 'info':
+                        toastr.info("{{ Session::get('message') }}");
+                        break;
+
+                    case 'warning':
+                        toastr.warning("{{ Session::get('message') }}");
+                        break;
+
+                    case 'success':
+                        toastr.success("{{ Session::get('message') }}");
+                        break;
+
+                    case 'error':
+                        toastr.error("{{ Session::get('message') }}");
+                        break;
+                }
+            @endif
+      </script>
    </body>
 </html>

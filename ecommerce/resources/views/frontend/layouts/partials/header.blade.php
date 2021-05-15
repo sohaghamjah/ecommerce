@@ -9,7 +9,13 @@
                    <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
                    <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
                    <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
-                   <li><a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>Login</a></li>
+                   <li>
+                       @auth
+                           <a href="{{ route('user.dashboard') }}"><i class="icon fa fa-user"></i>My Profile</a>
+                           @else
+                           <a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>Login</a>
+                       @endauth
+                    </li>
                 </ul>
              </div>
              <!-- /.cnt-account -->
@@ -50,7 +56,7 @@
                 <!-- ============================================================= LOGO ============================================================= -->
                 <div class="logo">
                    <a href="{{ url('/') }}">
-                   <img src="assets/frontend/images/logo.png" alt="">
+                   <img src="{{ asset('assets/frontend/images/logo.png') }}" alt="">
                    </a>
                 </div>
                 <!-- /.logo -->

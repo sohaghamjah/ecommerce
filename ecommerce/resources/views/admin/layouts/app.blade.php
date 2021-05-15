@@ -37,6 +37,9 @@
     <link href="{{ asset('assets/backend') }}/lib/Ionicons/css/ionicons.css" rel="stylesheet">
     <link href="{{ asset('assets/backend') }}/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
     <link href="{{ asset('assets/backend') }}/lib/rickshaw/rickshaw.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/backend') }}/css/toastr.min.css">
+    <link href="{{ asset('assets/backend') }}/lib/datatables/jquery.dataTables.css" rel="stylesheet">
+    <link href="{{ asset('assets/backend') }}/lib/select2/css/select2.min.css" rel="stylesheet">
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('assets/backend') }}/css/starlight.css">
@@ -62,7 +65,34 @@
     <script src="{{ asset('assets/backend') }}/lib/bootstrap/bootstrap.js"></script>
     <script src="{{ asset('assets/backend') }}/lib/jquery-ui/jquery-ui.js"></script>
     <script src="{{ asset('assets/backend') }}/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+    <script src="{{ asset('assets/backend') }}/lib/datatables/jquery.dataTables.js"></script>
+    <script src="{{ asset('assets/backend') }}/lib/datatables-responsive/dataTables.responsive.js"></script>
+    <script src="{{ asset('assets/backend') }}/lib/select2/js/select2.min.js"></script>
     <script src="{{ asset('assets/backend') }}/lib/jquery.sparkline.bower/jquery.sparkline.min.js"></script>
+    <script>
+        $(function(){
+          'use strict';
+
+          $('#datatable1').DataTable({
+            responsive: true,
+            language: {
+              searchPlaceholder: 'Search...',
+              sSearch: '',
+              lengthMenu: '_MENU_ items/page',
+            }
+          });
+
+        //   $('#datatable2').DataTable({
+        //     bLengthChange: false,
+        //     searching: false,
+        //     responsive: true
+        //   });
+
+          // Select2
+          $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
+
+        });
+      </script>
     <script src="{{ asset('assets/backend') }}/lib/d3/d3.js"></script>
     <script src="{{ asset('assets/backend') }}/lib/rickshaw/rickshaw.min.js"></script>
     <script src="{{ asset('assets/backend') }}/lib/chart.js/Chart.js"></script>
@@ -70,8 +100,32 @@
     <script src="{{ asset('assets/backend') }}/lib/Flot/jquery.flot.pie.js"></script>
     <script src="{{ asset('assets/backend') }}/lib/Flot/jquery.flot.resize.js"></script>
     <script src="{{ asset('assets/backend') }}/lib/flot-spline/jquery.flot.spline.js"></script>
+    <script src="{{ asset('assets/backend') }}/js/toastr.min.js"></script>
     <script src="{{ asset('assets/backend') }}/js/starlight.js"></script>
     <script src="{{ asset('assets/backend') }}/js/ResizeSensor.js"></script>
     <script src="{{ asset('assets/backend') }}/js/dashboard.js"></script>
+
+     <script>
+            @if(Session::has('message'))
+                var type = "{{ Session::get('alert-type', 'info') }}";
+                switch(type){
+                    case 'info':
+                        toastr.info("{{ Session::get('message') }}");
+                        break;
+
+                    case 'warning':
+                        toastr.warning("{{ Session::get('message') }}");
+                        break;
+
+                    case 'success':
+                        toastr.success("{{ Session::get('message') }}");
+                        break;
+
+                    case 'error':
+                        toastr.error("{{ Session::get('message') }}");
+                        break;
+                }
+            @endif
+      </script>
   </body>
 </html>

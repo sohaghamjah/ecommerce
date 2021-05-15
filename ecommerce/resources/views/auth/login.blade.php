@@ -52,7 +52,7 @@
                 <label>
                 <input type="radio" value="option2" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>Remember me!
                 </label>
-                <a href="#" class="forgot-password pull-right">Forgot your Password?</a>
+                <a href="{{ route('password.request') }}" class="forgot-password pull-right">Forgot your Password?</a>
              </div>
              <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
           </form>

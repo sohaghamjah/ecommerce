@@ -1,5 +1,5 @@
     <!-- ########## START: LEFT PANEL ########## -->
-    <div class="sl-logo"><a href=""><i class="icon ion-android-star-outline"></i> starlight</a></div>
+    <div class="sl-logo"><a href=""><i class="icon ion-android-star-outline"></i>DOKAN</a></div>
     <div class="sl-sideleft">
       <div class="input-group input-group-search">
         <input type="search" name="search" class="form-control" placeholder="Search">
@@ -16,12 +16,18 @@
               <span class="menu-item-label">Visit Site</span>
             </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <a href="index.html" class="sl-menu-link active">
+        <a href="{{ route('admin.dashboard') }}" class="sl-menu-link {{ Request::is('admin/dashboard') ? 'active' : '' }}">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
             <span class="menu-item-label">Dashboard</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
+        <a href="{{ route('admin.brands') }}" class="sl-menu-link {{ Request::is('admin/brands') ? 'active' : '' }}">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+              <span class="menu-item-label">Brands</span>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
         <a href="widgets.html" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
