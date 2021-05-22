@@ -56738,3 +56738,8 @@ a.hover-white-8:hover, a.hover-white-8:focus {
 .brand_table td{
     vertical-align: middle;
 }
+#preview_img .thumb{
+    margin: 5px;
+    border: 3px solid #dadada;
+    border-radius: 5px;
+}

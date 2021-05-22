@@ -7,7 +7,7 @@
         <div class="sl-mainpanel">
             <nav class="breadcrumb sl-breadcrumb">
               <a class="breadcrumb-item" href="{{ route('admin.dashboard') }}">Dokan</a>
-              <span class="breadcrumb-item active">Brands</span>
+              <span class="breadcrumb-item active">Categories</span>
             </nav>
 
             <div class="sl-pagebody">
@@ -15,7 +15,7 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-header">
-                                Brands
+                                <Categories></Categories>
                             </div>
                             <div class="card-body">
                                 <div class="table-wrapper">
@@ -23,24 +23,26 @@
                                       <thead>
                                         <tr>
                                             <th>SL</th>
-                                            <th>Brand Image</th>
-                                            <th>Brand Name En</th>
-                                            <th>Brand Name Bn</th>
+                                            <th>Category Icon</th>
+                                            <th>Category Name En</th>
+                                            <th>Category Name Bn</th>
                                             <th>Action</th>
                                         </tr>
                                       </thead>
                                       <tbody class="brand_table">
-                                        @foreach ($brand as $item)
+                                        @foreach ($cat as $item)
                                             <tr>
                                                 <td>{{ $loop -> index + 1 }}</td>
                                                 <td>
-                                                    <img style="width: 80px" src="{{ asset($item -> brand_photo) }}" alt="">
+                                                    <span class="btn btn-success" style="font-size: 18px">
+                                                        <i class="{{ $item -> cat_icon }}"></i>
+                                                    </span>
                                                 </td>
-                                                <td>{{ $item -> brand_name_en }}</td>
-                                                <td>{{ $item -> brand_name_bn }}</td>
+                                                <td>{{ $item -> cat_name_en }}</td>
+                                                <td>{{ $item -> cat_name_bn }}</td>
                                                 <td>
-                                                    <a style="font-size: 18px" title="Edit Data" href="{{ url('admin/brand/edit/'. $item ->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                                                    <a id="delete_confirm" style="font-size: 18px" title="Delete Data" href="{{ url('admin/brand/delete/'. $item -> id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                    <a style="font-size: 18px" title="Edit Data" href="{{ url('admin/categories/edit/'. $item ->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                                                    <a id="delete_confirm" style="font-size: 18px" title="Delete Data" href="{{ url('admin/categories/delete/'. $item -> id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -53,29 +55,29 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-header">
-                                Add new brand
+                                Add new category
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('admin.brand.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('admin.categories.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <label class="form-control-label">Brand Name English: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" type="text" name="brand_name_en" value="{{ old('brand_name_en') }}" placeholder="Enter Brand Name English">
-                                        @error('brand_name_en')
+                                        <label class="form-control-label">Category name English: <span class="tx-danger">*</span></label>
+                                        <input class="form-control" type="text" name="cat_name_en" value="{{ old('brand_name_en') }}" placeholder="Enter category name English">
+                                        @error('cat_name_en')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-control-label">Brand Name Bangla: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" type="text" name="brand_name_bn" value="{{ old('brand_name_bn') }}" placeholder="Enter Brand Name Bangla">
-                                        @error('brand_name_bn')
+                                        <label class="form-control-label">Category name Bangla: <span class="tx-danger">*</span></label>
+                                        <input class="form-control" type="text" name="cat_name_bn" value="{{ old('cat_name_bn') }}" placeholder="Enter category name Bangla">
+                                        @error('cat_name_bn')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-control-label">Brand Image: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" type="file" name="brand_photo">
-                                        @error('brand_photo')
+                                        <label class="form-control-label">Category icon: <span class="tx-danger">*</span></label>
+                                        <input class="form-control" type="text" name="cat_icon" value="{{ old('cat_icon') }}" placeholder="Enter category icon">
+                                        @error('cat_icon')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

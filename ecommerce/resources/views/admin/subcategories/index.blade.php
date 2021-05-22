@@ -1,13 +1,13 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Admin - Brands')
+@section('title', 'Admin - Sub Category')
 
 @section('content')
         <!-- ########## START: MAIN PANEL ########## -->
         <div class="sl-mainpanel">
             <nav class="breadcrumb sl-breadcrumb">
               <a class="breadcrumb-item" href="{{ route('admin.dashboard') }}">Dokan</a>
-              <span class="breadcrumb-item active">Brands</span>
+              <span class="breadcrumb-item active">Sub Categories</span>
             </nav>
 
             <div class="sl-pagebody">
@@ -15,32 +15,28 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-header">
-                                Brands
+                                <Categories></Categories>
                             </div>
                             <div class="card-body">
                                 <div class="table-wrapper">
                                     <table id="datatable1" class="table display responsive nowrap">
                                       <thead>
                                         <tr>
-                                            <th>SL</th>
-                                            <th>Brand Image</th>
-                                            <th>Brand Name En</th>
-                                            <th>Brand Name Bn</th>
+                                            <th>Category Name</th>
+                                            <th>Sub Cat Name</th>
+                                            <th>Sub Cat Name</th>
                                             <th>Action</th>
                                         </tr>
                                       </thead>
                                       <tbody class="brand_table">
-                                        @foreach ($brand as $item)
+                                        @foreach ($subcat as $item)
                                             <tr>
-                                                <td>{{ $loop -> index + 1 }}</td>
+                                                <td>{{ $item -> cat -> cat_name_en }}</td>
+                                                <td>{{ $item -> subcat_name_en }}</td>
+                                                <td>{{ $item -> subcat_name_bn }}</td>
                                                 <td>
-                                                    <img style="width: 80px" src="{{ asset($item -> brand_photo) }}" alt="">
-                                                </td>
-                                                <td>{{ $item -> brand_name_en }}</td>
-                                                <td>{{ $item -> brand_name_bn }}</td>
-                                                <td>
-                                                    <a style="font-size: 18px" title="Edit Data" href="{{ url('admin/brand/edit/'. $item ->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                                                    <a id="delete_confirm" style="font-size: 18px" title="Delete Data" href="{{ url('admin/brand/delete/'. $item -> id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                    <a style="font-size: 18px" title="Edit Data" href="{{ url('admin/sub-categories/edit/'. $item ->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                                                    <a id="delete_confirm" style="font-size: 18px" title="Delete Data" href="{{ url('admin/sub-categories/delete/'. $item -> id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -53,29 +49,34 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-header">
-                                Add new brand
+                                Add new sub category
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('admin.brand.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('admin.sub-category.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <label class="form-control-label">Brand Name English: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" type="text" name="brand_name_en" value="{{ old('brand_name_en') }}" placeholder="Enter Brand Name English">
-                                        @error('brand_name_en')
+                                        <label class="form-control-label">Category name<span class="tx-danger">*</span></label>
+                                        <select name="cat_id" class="form-control select2-show-search" data-placeholder="Choose category" tabindex="-1" aria-hidden="true">
+                                            <option label="Choose one"></option>
+                                            @foreach ($cat as $item)
+                                                 <option value="{{ $item -> id }}">{{ ucwords($item -> cat_name_en) }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('cat_id')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-control-label">Brand Name Bangla: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" type="text" name="brand_name_bn" value="{{ old('brand_name_bn') }}" placeholder="Enter Brand Name Bangla">
-                                        @error('brand_name_bn')
+                                        <label class="form-control-label">Sub category name English: <span class="tx-danger">*</span></label>
+                                        <input class="form-control" type="text" name="subcat_name_en" value="{{ old('subcat_name_en') }}" placeholder="Enter sub category name English">
+                                        @error('subcat_name_en')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-control-label">Brand Image: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" type="file" name="brand_photo">
-                                        @error('brand_photo')
+                                        <label class="form-control-label">Sub category name Bangla: <span class="tx-danger">*</span></label>
+                                        <input class="form-control" type="text" name="subcat_name_bn" value="{{ old('subcat_name_bn') }}" placeholder="Enter sub category name Bangla">
+                                        @error('subcat_name_bn')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\ImageManagerStatic as Image;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -44,12 +45,7 @@ class UserController extends Controller
             'updated_at' => Carbon::now(),
         ]);
 
-        $notification = array(
-            'message' => 'User Updated Successfull!',
-            'alert-type' => 'success'
-        );
-
-        return redirect() -> back() -> with($notification);
+        return redirect() -> back() -> with('toast_success', 'Brand Data has been Updated');
     }
 
     /**
@@ -76,11 +72,7 @@ class UserController extends Controller
             User::find(Auth::id())->update([
                 'photo' => $save_url,
             ]);
-            $notification = array(
-                'message' => 'User Photo Uploaded Successfull!',
-                'alert-type' => 'success'
-            );
-            return redirect() -> back() -> with($notification);
+            return redirect() -> back() -> with('toast_success', 'User profile photo has been Updated');
         }else{
             unlink($old_photo);
             $photo = $request -> photo;
@@ -90,11 +82,7 @@ class UserController extends Controller
             User::find(Auth::id())->update([
                 'photo' => $save_url,
             ]);
-            $notification = array(
-                'message' => 'User Photo Uploaded Successfull!',
-                'alert-type' => 'success'
-            );
-            return redirect() -> back() -> with($notification);
+            return redirect() -> back() -> with('toast_success', 'User profile photo has been Updated');
         }
     }
 
@@ -130,24 +118,16 @@ class UserController extends Controller
                 ]);
                 Auth::logout();
 
-                $notification = array(
-                    'message' => 'Password change successfull. Now login with new password!',
-                    'alert-type' => 'success'
-                );
-                return redirect() -> route('login') -> with($notification);
+                return redirect() -> route('login') -> with('toast_success', 'Password change successfull. Now login with new password!');
             }else{
                 $notification = array(
                     'message' => 'Password dose not matched!',
                     'alert-type' => 'error'
                 );
-                return redirect() -> back() -> with($notification);
+                return redirect() -> back() -> with('toast_success', 'Password dose not matched!');
             }
         }else{
-            $notification = array(
-                'message' => 'Old password dose not match!',
-                'alert-type' => 'error'
-            );
-            return redirect() -> back() -> with($notification);
+            return redirect() -> back() -> with('toast_success', 'Old password dose not match');
         }
     }
 }

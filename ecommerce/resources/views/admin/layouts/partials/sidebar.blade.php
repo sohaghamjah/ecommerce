@@ -28,26 +28,30 @@
               <span class="menu-item-label">Brands</span>
             </div><!-- menu-item -->
           </a><!-- sl-menu-link -->
-        <a href="widgets.html" class="sl-menu-link">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
-            <span class="menu-item-label">Cards &amp; Widgets</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <a href="#" class="sl-menu-link">
+        <a href="#" class="sl-menu-link {{ Request::is('admin/categories*') ? 'active show-sub' : '' }}">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
-            <span class="menu-item-label">Charts</span>
+            <span class="menu-item-label">Categories</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="chart-morris.html" class="nav-link">Morris Charts</a></li>
-          <li class="nav-item"><a href="chart-flot.html" class="nav-link">Flot Charts</a></li>
-          <li class="nav-item"><a href="chart-chartjs.html" class="nav-link">Chart JS</a></li>
-          <li class="nav-item"><a href="chart-rickshaw.html" class="nav-link">Rickshaw</a></li>
-          <li class="nav-item"><a href="chart-sparkline.html" class="nav-link">Sparkline</a></li>
+          <li class="nav-item"><a href="{{ route('admin.categories') }}" class="nav-link {{ Request::is('admin/categories') ? 'active' : '' }}">Add Categorie</a></li>
+          <li class="nav-item"><a href="{{ route('admin.sub-category') }}" class="nav-link {{ Request::is('admin/categories/sub-category') ? 'active' : '' }}">Sub Categories</a></li>
+          <li class="nav-item"><a href="{{ route('admin.sub-sub-category') }}" class="nav-link {{ Request::is('admin/categories/sub-sub-category') ? 'active' : '' }}">Sub Sub Categories</a></li>
         </ul>
+
+        <a href="#" class="sl-menu-link {{ Request::is('admin/product*') ? 'active show-sub' : '' }}">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+              <span class="menu-item-label">Product</span>
+              <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
+          <ul class="sl-menu-sub nav flex-column">
+            <li class="nav-item"><a href="{{ route('admin.add-product') }}" class="nav-link {{ Request::is('admin/product/add-product') ? 'active' : '' }}">Add Product</a></li>
+            <li class="nav-item"><a href="{{ route('admin.manage-product') }}" class="nav-link {{ Request::is('admin/product/manage-product') ? 'active' : '' }}">Manage Product</a></li>
+          </ul>
       </div><!-- sl-sideleft-menu -->
 
       <br>

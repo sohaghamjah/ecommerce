@@ -5,8 +5,10 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BrandController extends Controller
 {
@@ -45,11 +47,7 @@ class BrandController extends Controller
             'brand_slug_bn' => str_replace(' ','_', $request -> brand_name_bn),
             'brand_photo'   => $save_url,
         ]);
-        $notification = array(
-            'message' => 'Brand Uploaded Successfull!',
-            'alert-type' => 'success'
-        );
-        return redirect() -> back() -> with($notification);
+        return redirect() -> back() -> with('toast_success', 'Brand Added Successfully!');
     }
 
     /**
@@ -92,11 +90,7 @@ class BrandController extends Controller
                 'brand_slug_bn' => str_replace(' ','_', $request -> brand_name_bn),
                 'brand_photo'   => $save_url,
             ]);
-            $notification = array(
-                'message' => 'Brand Updated Successfull!',
-                'alert-type' => 'success'
-            );
-            return redirect() -> back() -> with($notification);
+            return redirect() -> route('admin.brands') ->  with('toast_success', 'Brand Updated Successfully!');
         }else{
             Brand::find($id)->update([
                 'brand_name_en' => $request -> brand_name_en,
@@ -104,11 +98,18 @@ class BrandController extends Controller
                 'brand_name_bn' => $request -> brand_name_bn,
                 'brand_slug_bn' => str_replace(' ','_', $request -> brand_name_bn),
             ]);
-            $notification = array(
-                'message' => 'Brand Updated Successfull!',
-                'alert-type' => 'success'
-            );
-            return redirect() -> back() -> with($notification);
+            return redirect() -> route('admin.brands') -> with('toast_success', 'Brand Updated Successfully!');
         }
+    }
+    /**
+     * Brand delete
+     */
+
+    public function destroy($id){
+        $brand = Brand::find($id);
+        $brand_image = $brand -> brand_photo;
+        unlink($brand_image);
+        $brand -> delete();
+        return redirect()->back()->with('toast_success', 'Brand Data has been deleted');
     }
 }
