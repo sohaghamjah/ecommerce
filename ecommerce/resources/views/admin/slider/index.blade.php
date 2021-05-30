@@ -23,9 +23,8 @@
                                       <thead>
                                         <tr>
                                             <th>SL</th>
-                                            <th>SLider Image</th>
+                                            <th>SLider</th>
                                             <th>Title</th>
-                                            <th>Description</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -37,8 +36,13 @@
                                                 <td>
                                                     <img style="width: 80px" src="{{ asset($item -> photo) }}" alt="">
                                                 </td>
-                                                <td>{{ $item -> title }}</td>
-                                                <td>{{ $item -> description }}</td>
+                                                <td>
+                                                    @if ($item -> title_en == NULL)
+                                                        <span class="badge badge-pill badge-danger" style="font-size: 14px">No Title found</span>
+                                                    @else
+                                                        {{ $item -> title_en }}
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if ($item -> status == 1)
                                                         <span class="badge badge-pill badge-success" style="font-size: 14px">Active</span>
@@ -48,12 +52,12 @@
                                                 </td>
                                                 <td>
                                                     @if ($item -> status == 1)
-                                                        <a style="font-size: 18px" title="Inactive Product" href="{{ url('admin/product/manage_product/inactive/'. $item -> id) }}" class="btn btn-danger"><i class="fa fa-arrow-down"></i></a>
+                                                        <a style="font-size: 18px" title="Inactive Slider" href="{{ url('admin/slider/inactive/'. $item -> id) }}" class="btn btn-danger"><i class="fa fa-arrow-down"></i></a>
                                                     @else
-                                                        <a style="font-size: 18px" title="Active product" href="{{ url('admin/product/manage_product/active/'. $item -> id) }}" class="btn btn-success"><i class="fa fa-arrow-up"></i></a>
+                                                        <a style="font-size: 18px" title="Active Slider" href="{{ url('admin/slider/active/'. $item -> id) }}" class="btn btn-success"><i class="fa fa-arrow-up"></i></a>
                                                     @endif
-                                                    <a style="font-size: 18px" title="Edit Data" href="{{ url('admin/brand/edit/'. $item ->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                                                    <a id="delete_confirm" style="font-size: 18px" title="Delete Data" href="{{ url('admin/brand/delete/'. $item -> id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                    <a style="font-size: 18px" title="Edit Data" href="{{ url('admin/slider/edit/'. $item ->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                                                    <a id="delete_confirm" style="font-size: 18px" title="Delete Data" href="{{ url('admin/slider/destroy/'. $item -> id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -72,12 +76,20 @@
                                 <form action="{{ route('admin.slider.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
-                                        <label class="form-control-label">Slider Title: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" type="text" name="slider_title" value="{{ old('slider_title') }}" placeholder="Enter Slider Title">
+                                        <label class="form-control-label">Slider Title English:</label>
+                                        <input class="form-control" type="text" name="slider_title_en" value="{{ old('slider_title_en') }}" placeholder="Enter Slider Title English">
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-control-label">Slider Description: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" type="text" name="slider_description" value="{{ old('slider_description') }}" placeholder="Enter Slider Description">
+                                        <label class="form-control-label">Slider Title Bangla:</label>
+                                        <input class="form-control" type="text" name="slider_title_bn" value="{{ old('slider_title_bn') }}" placeholder="Enter Slider Title Bangla">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Slider Description English:</label>
+                                        <input class="form-control" type="text" name="slider_des_en" value="{{ old('slider_des_en') }}" placeholder="Enter Slider Description English">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Slider Description Bangla:</label>
+                                        <input class="form-control" type="text" name="slider_des_bn" value="{{ old('slider_des_bn') }}" placeholder="Enter Slider Description Bangla">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label">Slider Image: <span class="tx-danger">*</span></label>

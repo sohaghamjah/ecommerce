@@ -87,6 +87,11 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['admin', '
 
     Route::get('slider', [SliderController::class, 'index']) -> name('slider.index');
     Route::post('slider/store', [SliderController::class, 'store']) -> name('slider.store');
+    Route::get('slider/edit/{id}', [SliderController::class, 'edit']) -> name('slider.edit');
+    Route::post('slider/update', [SliderController::class, 'update']) -> name('slider.update');
+    Route::get('slider/destroy/{id}', [SliderController::class, 'destroy']);
+    Route::get('slider/inactive/{id}', [SliderController::class, 'sliderInactive']);
+    Route::get('slider/active/{id}', [SliderController::class, 'slidertActive']);
 
 
 });
