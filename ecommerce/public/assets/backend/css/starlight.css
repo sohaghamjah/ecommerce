@@ -56743,3 +56743,12 @@ a.hover-white-8:hover, a.hover-white-8:focus {
     border: 3px solid #dadada;
     border-radius: 5px;
 }
+.multi_img{
+    position: relative;
+}
+.multi_img_delete_btn {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    transition: top 10s ease;
+}

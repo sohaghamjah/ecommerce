@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\User\UserController;
@@ -73,7 +74,19 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['admin', '
     Route::post('product/store', [ProductController::class, 'store']) -> name('product.store');
     Route::get('sub-subcategory/ajax/{id}', [ProductController::class, 'subSubCatAjax']);
     Route::get('product/manage-product', [ProductController::class, 'manageProduct']) -> name('manage-product');
+    Route::get('product/manage-product/edit/{id}', [ProductController::class, 'edit']) -> name('product.edit');
+    Route::post('product/manage-product/update', [ProductController::class, 'update']) -> name('product.update');
+    Route::post('product/manage-product/multi-image/update', [ProductController::class, 'multiImageUpdate']) -> name('product.multi-img.update');
+    Route::post('product/manage-product/main-thumb/update', [ProductController::class, 'mainThumbUpdate']) -> name('product.main-thumb.update');
+    Route::get('product/manage-product/multi-img/delete/{id}', [ProductController::class, 'multiImageDelete']);
+    Route::get('product/manage_product/inactive/{id}', [ProductController::class, 'productInactive']);
+    Route::get('product/manage_product/active/{id}', [ProductController::class, 'productActive']);
+    Route::get('product/manage_product/show/{id}', [ProductController::class, 'showProduct']) -> name('product.show');
 
+    // =====================SLider Route=====================
+
+    Route::get('slider', [SliderController::class, 'index']) -> name('slider.index');
+    Route::post('slider/store', [SliderController::class, 'store']) -> name('slider.store');
 
 
 });
