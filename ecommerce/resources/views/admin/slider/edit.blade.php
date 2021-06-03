@@ -23,6 +23,18 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
+                                            <label class="form-control-label">Slider Top Title English:</label>
+                                            <input class="form-control" type="text" name="top_en" value="{{ $slider -> top_en }}" placeholder="Enter Slider Top Title English">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Slider Top Title Bangla:</label>
+                                            <input class="form-control" type="text" name="top_en" value="{{ $slider -> top_bn }}" placeholder="Enter Slider Top Title Bangla">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
                                             <label class="form-control-label">Slider Title English:</label>
                                             <input class="form-control" type="text" name="title_en" value="{{ $slider -> title_en }}" placeholder="Enter Slider Title English">
                                         </div>

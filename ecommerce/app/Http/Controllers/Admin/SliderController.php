@@ -35,6 +35,8 @@ class SliderController extends Controller
         Image::make($photo)->resize(870, 370) -> save('assets/media/backend/slider/'.$photo_name);
         $save_url = 'assets/media/backend/slider/'.$photo_name;
         Slider::create([
+            'top_en' => $request -> top_en,
+            'top_bn' => $request -> top_bn,
             'title_en' => $request -> slider_title_en,
             'title_bn' => $request -> slider_title_bn,
             'des_en' => $request -> slider_des_en,
@@ -66,6 +68,8 @@ class SliderController extends Controller
             Image::make($photo)->resize(870, 370) -> save('assets/media/backend/slider/'.$photo_name);
             $save_url = 'assets/media/backend/slider/'.$photo_name;
             Slider::find($id) -> update([
+                'top_en' => $request -> top_en,
+                'top_bn' => $request -> top_bn,
                 'title_en' => $request -> title_en,
                 'title_bn' => $request -> title_bn,
                 'des_en' => $request -> des_en,
@@ -74,6 +78,8 @@ class SliderController extends Controller
             ]);
         }else{
             Slider::find($id) -> update([
+                'top_en' => $request -> top_en,
+                'top_bn' => $request -> top_bn,
                 'title_en' => $request -> title_en,
                 'title_bn' => $request -> title_bn,
                 'des_en' => $request -> des_en,

@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
@@ -91,7 +92,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['admin', '
     Route::post('slider/update', [SliderController::class, 'update']) -> name('slider.update');
     Route::get('slider/destroy/{id}', [SliderController::class, 'destroy']);
     Route::get('slider/inactive/{id}', [SliderController::class, 'sliderInactive']);
-    Route::get('slider/active/{id}', [SliderController::class, 'slidertActive']);
+    Route::get('slider/active/{id}', [SliderController::class, 'sliderActive']);
 
 
 });
@@ -108,3 +109,8 @@ Route::group(['as' => 'user.', 'prefix' => 'user', 'middleware' => ['user', 'aut
 
 // ================ FrontEnd Route =======================
 Route::get('/', [IndexController::class, 'index']);
+
+// Frontend language
+
+Route::get('language/bangla', [LanguageController::class, 'bangla']) -> name('language.bangla');
+Route::get('language/english', [LanguageController::class, 'english']) -> name('language.english');

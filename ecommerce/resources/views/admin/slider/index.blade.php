@@ -76,6 +76,14 @@
                                 <form action="{{ route('admin.slider.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
+                                        <label class="form-control-label">Slider Top English:</label>
+                                        <input class="form-control" type="text" name="top_en" value="{{ old('top_en') }}" placeholder="Enter Slider Top Title English">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Slider Top Bangla:</label>
+                                        <input class="form-control" type="text" name="top_bn" value="{{ old('top_bn') }}" placeholder="Enter Slider Top Title Bangla">
+                                    </div>
+                                    <div class="form-group">
                                         <label class="form-control-label">Slider Title English:</label>
                                         <input class="form-control" type="text" name="slider_title_en" value="{{ old('slider_title_en') }}" placeholder="Enter Slider Title English">
                                     </div>

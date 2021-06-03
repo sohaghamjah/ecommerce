@@ -23,7 +23,7 @@
       <link rel="stylesheet" href="{{ asset('assets/frontend') }}/css/rateit.css">
       <link rel="stylesheet" href="{{ asset('assets/frontend') }}/css/bootstrap-select.min.css">
       <!-- Icons/Glyphs -->
-      {{-- <link rel="stylesheet" href="{{ asset('assets/frontend') }}/css/font-awesome.css"> --}}
+      <link rel="stylesheet" href="{{ asset('assets/frontend') }}/css/font-awesome.css">
       {{-- <link rel="stylesheet" href="{{ asset('assets/backend') }}/css/toastr.min.css"> --}}
       <!-- Fonts -->
       <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
