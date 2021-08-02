@@ -37,7 +37,7 @@
                           <div class="product">
                               <div class="product-image">
                                   <div class="image">
-                                      <a href="detail.html"><img  src="{{ $product -> product_thumb }}" alt=""></a>
+                                      <a href="{{ url('product/single/'. $product -> id) }}"><img  src="{{ $product -> product_thumb }}" alt=""></a>
                                   </div>
                                   <!-- /.image -->
                                   @php
@@ -64,7 +64,7 @@
                               </div>
                               <!-- /.product-image -->
                               <div class="product-info text-left">
-                                  <h3 class="name"><a href="detail.html">
+                                  <h3 class="name"><a href="{{ url('product/single/'. $product -> id) }}">
                                   @if (session() -> get('language')  == 'bangla')
                                     {{ $product -> product_name_bn }}
                                   @else
@@ -149,7 +149,7 @@
                                 <div class="product">
                                     <div class="product-image">
                                         <div class="image">
-                                            <a href="detail.html"><img  src="{{ $product -> product_thumb }}" alt=""></a>
+                                            <a href="{{ url('product/single/'. $product -> id) }}"><img  src="{{ $product -> product_thumb }}" alt=""></a>
                                         </div>
                                         <!-- /.image -->
                                     @php
@@ -176,7 +176,7 @@
                                     </div>
                                     <!-- /.product-image -->
                                     <div class="product-info text-left">
-                                        <h3 class="name"><a href="detail.html">
+                                        <h3 class="name"><a href="{{ url('product/single/'. $product -> id) }}">
                                             @if (session() -> get('language')  == 'bangla')
                                                 {{ $product -> product_name_bn }}
                                             @else

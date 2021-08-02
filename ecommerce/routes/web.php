@@ -114,3 +114,7 @@ Route::get('/', [IndexController::class, 'index']);
 
 Route::get('language/bangla', [LanguageController::class, 'bangla']) -> name('language.bangla');
 Route::get('language/english', [LanguageController::class, 'english']) -> name('language.english');
+
+// FrontEnd Product
+
+Route::get('product/single/{id}', [IndexController::class, 'singleProduct']);

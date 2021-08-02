@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'eCommerce System')
+@section('title', 'Dokan - Home')
 @section('content')
 <div class="row">
 @php

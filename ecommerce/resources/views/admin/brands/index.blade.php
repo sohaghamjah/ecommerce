@@ -24,8 +24,8 @@
                                         <tr>
                                             <th>SL</th>
                                             <th>Brand Image</th>
-                                            <th>Brand Name En</th>
-                                            <th>Brand Name Bn</th>
+                                            <th>Brand Name</th>
+                                            <th>Brand Name</th>
                                             <th>Action</th>
                                         </tr>
                                       </thead>

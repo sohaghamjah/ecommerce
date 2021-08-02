@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\MultiImage;
 use App\Models\Product;
 use App\Models\Slider;
 use Illuminate\Http\Request;
@@ -18,6 +19,15 @@ class IndexController extends Controller
             'cat' => $cat,
             'slider' => $slider,
             'product' => $product,
+        ]);
+    }
+
+    public function singleProduct($id){
+        $single_product = Product::find($id);
+        $multi_img = MultiImage::where('product_id', $id) -> get();
+        return view('frontend.single-product',[
+            'product' => $single_product,
+            'multi_img' => $multi_img,
         ]);
     }
 }
