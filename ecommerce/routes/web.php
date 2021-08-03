@@ -121,5 +121,6 @@ Route::get('product/single/{id}/{slug}', [IndexController::class, 'singleProduct
 // tag wise product view
 Route::get('product/tags/search/{tag}', [IndexController::class, 'tagWiseProduct']);
 // sub sub category wise product view
-Route::get('subsubcat/product//search/{id}/{slug}', [IndexController::class, 'subsubcatWiseProduct']);
+Route::get('subsubcat/product/search/{id}/{slug}', [IndexController::class, 'subsubcatWiseProduct']);
+Route::get('cat/product/search/{id}/{slug}', [IndexController::class, 'catWiseProduct']);
 

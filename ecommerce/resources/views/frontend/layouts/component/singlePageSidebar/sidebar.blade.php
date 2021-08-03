@@ -113,28 +113,53 @@
      <!-- ============================================== HOT DEALS: END ============================================== -->
 
     <!-- ============================================== PRODUCT TAGS ============================================== -->
-    <br><br>
+
+    @php
+        $cats = App\Models\Category::orderBy('cat_name_en', 'ASC') -> get();
+    @endphp
+
+    <div class="sidebar-widget product-tag wow fadeInUp">
+        <h3 class="section-title">Product Category</h3>
+        <div class="sidebar-widget-body outer-top-xs">
+            <div class="tag-list">
+                @if (session() -> get('language') == 'bangla')
+                    @foreach ($cats as $cat)
+                    <a class="item" title="Phone" href="{{ url('cat/product/search/'.$cat -> id.'/'.$cat -> cat_name_bn) }}">{{ $cat -> cat_name_bn }}</a>
+                    @endforeach
+                @else
+                    @foreach ($cats as $cat)
+                        <a class="item" title="Phone" href="{{ url('cat/product/search/'.$cat -> id.'/'.$cat -> cat_name_en) }}">{{ $cat -> cat_name_en }}</a>
+                    @endforeach
+                @endif
+            </div>
+            <!-- /.tag-list -->
+        </div>
+        <!-- /.sidebar-widget-body -->
+    </div>
+
+    <br>
+
     @php
         $tags_en = App\Models\Product::groupBy('product_tags_en') -> select('product_tags_en') -> get();
         $tags_bn = App\Models\Product::groupBy('product_tags_bn') -> select('product_tags_bn') -> get();
     @endphp
     <div class="sidebar-widget product-tag wow fadeInUp">
-    <h3 class="section-title">Product tags</h3>
-    <div class="sidebar-widget-body outer-top-xs">
-        <div class="tag-list">
-            @if (session() -> get('language') == 'bangla')
-                @foreach ($tags_bn as $tag_bn)
-                <a class="item" title="Phone" href="{{ url('product/tags/search/'. $tag_bn -> product_tags_bn) }}">{{ $tag_bn -> product_tags_bn }}</a>
-                @endforeach
-            @else
-                @foreach ($tags_en as $tag_en)
-                    <a class="item" title="Phone" href="{{ url('product/tags/search/'. $tag_en -> product_tags_en) }}">{{ $tag_en -> product_tags_en }}</a>
-                @endforeach
-            @endif
+        <h3 class="section-title">Product tags</h3>
+        <div class="sidebar-widget-body outer-top-xs">
+            <div class="tag-list">
+                @if (session() -> get('language') == 'bangla')
+                    @foreach ($tags_bn as $tag_bn)
+                    <a class="item" title="Phone" href="{{ url('product/tags/search/'. $tag_bn -> product_tags_bn) }}">{{ $tag_bn -> product_tags_bn }}</a>
+                    @endforeach
+                @else
+                    @foreach ($tags_en as $tag_en)
+                        <a class="item" title="Phone" href="{{ url('product/tags/search/'. $tag_en -> product_tags_en) }}">{{ $tag_en -> product_tags_en }}</a>
+                    @endforeach
+                @endif
+            </div>
+            <!-- /.tag-list -->
         </div>
-        <!-- /.tag-list -->
-    </div>
-    <!-- /.sidebar-widget-body -->
+        <!-- /.sidebar-widget-body -->
     </div>
 
        <!-- ==============================================

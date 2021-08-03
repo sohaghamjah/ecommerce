@@ -207,7 +207,7 @@
                    <div class="nav-outer">
                       <ul class="nav navbar-nav">
                          <li class="active dropdown yamm-fw">
-                            <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="{{ url('/') }}" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">
                                 @if (session() -> get('language') == 'bangla')
                                      হোম
                                     @else
@@ -221,9 +221,9 @@
                          @foreach ($cat as $cat)
                             <li class="dropdown yamm mega-menu">
                                 @if (session() -> get('language') == 'bangla')
-                                    <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">{{ $cat -> cat_name_bn }}</a>
+                                    <a href="{{ url('cat/product/search/'. $cat -> id.'/'.$cat -> cat_slug_bn) }}" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">{{ $cat -> cat_name_bn }}</a>
                                     @else
-                                    <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">{{ $cat -> cat_name_en }}</a>
+                                    <a href="{{ url('cat/product/search/'. $cat -> id.'/'.$cat -> cat_slug_en) }}" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">{{ $cat -> cat_name_en }}</a>
                                 @endif
                                 <ul class="dropdown-menu container">
                                     @php

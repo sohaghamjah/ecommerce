@@ -31,9 +31,9 @@
                                      <ul class="links list-unstyled">
                                          @foreach ($subsubcat as $subsubcat)
                                              @if (session() -> get('language') == 'bangla')
-                                             <li><a href="{{ url('subsubcat/product/'. $subsubcat -> id.'/'. $subsubcat -> sub_sub_cat_slug_bn) }}">{{ $subsubcat -> sub_sub_cat_name_bn }}</a></li>
+                                             <li><a href="{{ url('subsubcat/product/search/'. $subsubcat -> id.'/'. $subsubcat -> sub_sub_cat_slug_bn) }}">{{ $subsubcat -> sub_sub_cat_name_bn }}</a></li>
                                              @else
-                                             <li><a href="{{ url('subsubcat/product/'. $subsubcat -> id.'/'. $subsubcat -> sub_sub_cat_slug_en) }}">{{ $subsubcat -> sub_sub_cat_name_en }}</a></li>
+                                             <li><a href="{{ url('subsubcat/product/search/'. $subsubcat -> id.'/'. $subsubcat -> sub_sub_cat_slug_en) }}">{{ $subsubcat -> sub_sub_cat_name_en }}</a></li>
                                              @endif
                                          @endforeach
                                      </ul>
