@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,6 +116,10 @@ Route::get('/', [IndexController::class, 'index']);
 Route::get('language/bangla', [LanguageController::class, 'bangla']) -> name('language.bangla');
 Route::get('language/english', [LanguageController::class, 'english']) -> name('language.english');
 
-// FrontEnd Product
+// FrontEnd single Product
+Route::get('product/single/{id}/{slug}', [IndexController::class, 'singleProduct']);
+// tag wise product view
+Route::get('product/tags/search/{tag}', [IndexController::class, 'tagWiseProduct']);
+// sub sub category wise product view
+Route::get('subsubcat/product//search/{id}/{slug}', [IndexController::class, 'subsubcatWiseProduct']);
 
-Route::get('product/single/{id}', [IndexController::class, 'singleProduct']);
