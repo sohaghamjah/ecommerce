@@ -6,6 +6,7 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
       <meta name="description" content="">
+      <meta name="csrf-token" content="{{ csrf_token() }}">
       <meta name="author" content="">
       <meta name="keywords" content="MediaCenter, Template, eCommerce">
       <meta name="robots" content="all">
@@ -67,6 +68,60 @@
         @include('frontend.layouts.partials.footer')
       <!-- ============================================================= FOOTER : END============================================================= -->
 
+      <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pname"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card" style="width:16rem;">
+                            <img id="pimage" src="" class="card-img-top"  alt="" style="height: 200px;">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="list-group">
+                            <li class="list-group-item">Price: <strong class="text-danger">$<span id="pprice"></span> </strong>
+                                <del id="pdprice">$</del>
+                            </li>
+                            <li class="list-group-item">Product Code: <strong id="pcode"></strong></li>
+                            <li class="list-group-item">Category: <strong id="pcategory"></strong></li>
+                            <li class="list-group-item">Brand: <strong id="pbrand"></strong> </li>
+                            <li class="list-group-item">Stock: <span class="badge badge-pill badge-success" id="aviable" style="background:green; color:white;"></span>
+                                <span class="badge badge-pill badge-danger" id="stockout" style="background:red; color:white;"></span>
+                            </li>
+                          </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group" id="cartModalColorArea">
+                            <label for="color">Select Color</label>
+                            <select id="cartModalColor" class="form-control" id="color" name="color">
+                            </select>
+                        </div>
+                          <div class="form-group" id="cartModalSizeArea">
+                            <label for="size">Select Size</label>
+                            <select id="cartModalSize" class="form-control" id="size" name="size">
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="qty">Quantity</label>
+                            <input type="number" class="form-control" id="qty" value="1" min="1">
+                          </div>
+                          <input type="hidden" id="product_id">
+                          <button type="submit" class="btn btn-danger" onclick="addToCart()">Add To Cart</button>
+                          </div>
+                    </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
 
 
       <!-- For demo purposes – can be removed on production -->
@@ -109,5 +164,69 @@
             @endif
       </script>
         @include('sweetalert::alert')
+
+    <script>
+        $.ajaxSetup({
+            headers:{
+                'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+            }
+        })
+
+        function productView(id){
+            $.ajax({
+                type: "GET",
+                url: "product/view/modal/"+id,
+                dataType: "json",
+                success: function (response) {
+                    $('#pname').text(response.product.product_name_en);
+                    $('#pprice').text(response.product.selling_price);
+                    $('#pcode').text(response.product.product_code);
+                    $('#pcategory').text(response.product.cat.cat_name_en);
+                    $('#pbrand').text(response.product.brand.brand_name_en);
+                    $('#pimage').attr('src', response.product.product_thumb);
+
+                    //stock
+                        if (response.product.product_qty > 0) {
+                                $('#aviable').text('');
+                                $('#stockout').text('');
+                                $('#aviable').text('In Stock');
+                        }else{
+                                $('#aviable').text('');
+                                $('#stockout').text('');
+                                $('#stockout').text('Out Of Stock');
+                        }
+
+                    // Product price
+                    if (response.product.discount_price == null) {
+                        $('#pprice').text('');
+                        $('#pdprice').text('');
+                        $('#pprice').text(response.product.selling_price);
+                    }else{
+                        $('#pprice').text(response.product.discount_price);
+                        $('#pdprice').text(response.product.selling_price);
+                     }
+
+                    // Product color
+                    $('#cartModalColor').empty();
+                    $.each(response.product_color, function (key, value) {
+                        $('#cartModalColor').append('<option value="'+value+'">'+value+'</option>')
+                    });
+
+                    // Product size
+                    $('#cartModalSize').empty();
+                    $.each(response.product_size, function (key, value) {
+                        $('#cartModalSize').append('<option value="'+value+'">'+value+'</option>')
+                        if (response.product_size == "") {
+                            $('#cartModalSizeArea').hide();
+                        }else{
+                            $('#cartModalSizeArea').show();
+                        }
+                    });
+                }
+            });
+        }
+        productView();
+
+    </script>
    </body>
 </html>

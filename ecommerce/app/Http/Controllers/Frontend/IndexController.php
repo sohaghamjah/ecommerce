@@ -43,12 +43,28 @@ class IndexController extends Controller
         ]);
     }
 
+    // Single page view
     public function singleProduct($id,$slug){
         $single_product = Product::find($id);
+        // product color
+        $product_color_en = explode(',', $single_product -> product_color_en);
+        $product_color_bn = explode(',', $single_product -> product_color_bn);
+        // product size
+        $product_size_en = explode(',', $single_product -> product_size_en);
+        $product_size_bn = explode(',', $single_product -> product_size_bn);
+
         $multi_img = MultiImage::where('product_id', $id) -> get();
+        $cat_id = $single_product -> cat_id;
+        $reletedProduct = Product::where('cat_id', $cat_id) -> where('id','!=', $id) -> orderBy('id', 'DESC') -> get();
+
         return view('frontend.single-product',[
             'product' => $single_product,
             'multi_img' => $multi_img,
+            'product_color_en' => $product_color_en,
+            'product_color_bn' => $product_color_bn,
+            'product_size_en' => $product_size_en,
+            'product_size_bn' => $product_size_bn,
+            'reletedProduct' => $reletedProduct,
         ]);
     }
 
@@ -66,5 +82,22 @@ class IndexController extends Controller
     public function catWiseProduct($id, $slug){
         $products = Product::where('status', 1) -> where('cat_id', $id) -> orderBy('id', 'DESC') -> paginate(12);
         return view('frontend.cat-productView', compact('products'));
+    }
+
+    // Product view with cart modal ajax
+
+    public function productViewCartModal($id){
+        $product = Product::with('cat','brand')->find($id);
+        // product color
+        $product_color = explode(',', $product -> product_color_en);
+        // product size
+        $product_size = explode(',', $product -> product_size_en);
+
+        return response() -> json(array(
+            'product' => $product,
+            'product_color' => $product_color,
+            'product_size' => $product_size,
+        ));
+
     }
 }

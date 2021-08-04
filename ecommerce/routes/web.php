@@ -123,4 +123,6 @@ Route::get('product/tags/search/{tag}', [IndexController::class, 'tagWiseProduct
 // sub sub category wise product view
 Route::get('subsubcat/product/search/{id}/{slug}', [IndexController::class, 'subsubcatWiseProduct']);
 Route::get('cat/product/search/{id}/{slug}', [IndexController::class, 'catWiseProduct']);
+// product veiw cart modal ajax
+Route::get('product/view/modal/{id}', [IndexController::class, 'productViewCartModal']);
 
