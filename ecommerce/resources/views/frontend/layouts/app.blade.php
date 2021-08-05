@@ -113,8 +113,8 @@
                             <label for="qty">Quantity</label>
                             <input type="number" class="form-control" id="qty" value="1" min="1">
                           </div>
-                          <input type="hidden" id="product_id">
-                          <button type="submit" class="btn btn-danger" onclick="addToCart()">Add To Cart</button>
+                          <input type="hidden" id="addToCartProductId">
+                          <button type="submit" class="btn btn-danger" id="addTocartBtn">Add To Cart</button>
                           </div>
                     </div>
             </div>
@@ -138,6 +138,7 @@
       <script src="{{ asset('assets/frontend') }}/js/lightbox.min.js"></script>
       <script src="{{ asset('assets/frontend') }}/js/bootstrap-select.min.js"></script>
       <script src="{{ asset('assets/frontend') }}/js/wow.min.js"></script>
+      <script src="{{ asset('assets/frontend') }}/js/sweetalert2@11.js"></script>
       <script src="{{ asset('assets/backend') }}/js/toastr.min.js"></script>
       <script src="{{ asset('assets/frontend') }}/js/scripts.js"></script>
 
@@ -172,6 +173,7 @@
             }
         })
 
+        // ======== Start Product veiw with modal =========
         function productView(id){
             $.ajax({
                 type: "GET",
@@ -184,6 +186,8 @@
                     $('#pcategory').text(response.product.cat.cat_name_en);
                     $('#pbrand').text(response.product.brand.brand_name_en);
                     $('#pimage').attr('src', response.product.product_thumb);
+                    $('#addToCartProductId').val(id);
+                    $('#qty').val(1);
 
                     //stock
                         if (response.product.product_qty > 0) {
@@ -225,8 +229,82 @@
                 }
             });
         }
-        productView();
 
+        // ======== Add To Cart Product  =========
+
+        $('#addTocartBtn').click(function (e) {
+            e.preventDefault();
+            var id = $('#addToCartProductId').val();
+            var color = $('#cartModalColor option:selected').text();
+            var size = $('#cartModalSize option:selected').text();
+            var qty = $('#qty').val();
+            var name = $('#pname').text();
+            addToCart(id, color, size, qty, name);
+        });
+
+        function addToCart(id, color, size, qty, name){
+            $.ajax({
+                type: "POST",
+                url: "/cart/data/store/"+id,
+                data: {
+                    color: color,
+                    size : size,
+                    qty  : qty,
+                    name  : name,
+                },
+                dataType: "json",
+                success: function (response) {
+                    $('#cartModal').modal('hide');
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Product Added To Cart',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                },
+                error: function (error) {
+                    $('#cartModal').modal('hide');
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Product Added To Cart Faield',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                }
+            });
+        }
+
+        // ======== Mini cart view  =========
+
+        function miniCartView(){
+            $.ajax({
+                type: "GET",
+                url: "/product/minicart/show",
+                dataType: "json",
+                success: function (response) {
+                   $.each(response.carts, function (kay, value) {
+                    $('<row>').html('<div class="col-xs-4">'+
+                        '<div class="image">'+
+                        '<a href="detail.html"><img src='+value.options.image+' alt=""></a>'+
+                        '</div>'+
+                        '</div>'+
+                        '<div class="col-xs-7">'+
+                        '<h3 class="name"><a href="index8a95.html?page-detail">'+value.name+'</a></h3>'+
+                        '<div class="price">Tk '+value.price+'</div>'+
+                        '</div>'+
+                        '<div class="col-xs-1 action">'+
+                        '<a href="#"><i class="fa fa-trash"></i></a>'+
+                        '</div>'
+                        ).appendTo('#miniCart');
+                   });
+                }
+            });
+        }
+        miniCartView()
     </script>
    </body>
 </html>

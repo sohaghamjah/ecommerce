@@ -67,7 +67,7 @@
                   <!-- /.gallery-holder -->
                   <div class='col-sm-6 col-md-7 product-info-block'>
                      <div class="product-info">
-                        <h1 class="name">
+                        <h1 class="name" id="pname">
                             @if (session() -> get('language') == 'bangla')
                                 {{ $product -> product_name_bn }}
                             @else
@@ -183,8 +183,8 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="color">Select Color</label>
-                                        <select class="form-control" id="color">
+                                        <label for="cartModalColor">Select Color</label>
+                                        <select class="form-control" id="cartModalColor">
                                             @foreach ($product_color_en as $color)
                                                 <option value="{{ $color }}">{{ ucwords($color) }}</option>
                                             @endforeach
@@ -196,8 +196,8 @@
                                     @if ($product->product_size_en == null)
                                     @else
                                     <div class="form-group">
-                                        <label for="size">Select Size</label>
-                                        <select class="form-control" id="size">
+                                        <label for="cartModalSize">Select Size</label>
+                                        <select class="form-control" id="cartModalSize">
                                             @foreach ($product_size_en as $size)
                                             <option value="{{ $size }}">{{ ucwords($size) }}</option>
                                           @endforeach
@@ -218,12 +218,14 @@
                                           <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
                                           <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
                                        </div>
-                                       <input type="text" value="1">
+                                       <input type="text" value="1" min="1" id="qty">
+                                       {{-- Product details get --}}
+                                       <input type="hidden" name="" id="addToCartProductId" value="{{ $product -> id }}">
                                     </div>
                                  </div>
                               </div>
                               <div class="col-sm-7">
-                                 <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
+                                 <a href="#" id="addTocartBtn" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
                               </div>
                            </div>
                            <!-- /.row -->

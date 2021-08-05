@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\ProductController;
@@ -125,4 +126,9 @@ Route::get('subsubcat/product/search/{id}/{slug}', [IndexController::class, 'sub
 Route::get('cat/product/search/{id}/{slug}', [IndexController::class, 'catWiseProduct']);
 // product veiw cart modal ajax
 Route::get('product/view/modal/{id}', [IndexController::class, 'productViewCartModal']);
+// Cart data store or add to cart
+Route::post('/cart/data/store/{id}', [CartController::class, 'addToCart']);
+// Product mini cart data show
+Route::get('product/minicart/show', [CartController::class, 'miniCartShow']);
+
 
